@@ -1,0 +1,29 @@
+{
+  "name": "fe-engineering",
+  "version": "1.0.0",
+  "description": "探索前端工程化最佳实践",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "keywords": [
+    "front-end",
+    "configuration"
+  ],
+  "author": "liuyun",
+  "license": "MIT",
+  "dependencies": {
+    "vitepress": "1.0.0-beta.7"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yun8711/fe-engineering.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yun8711/fe-engineering/issues"
+  }
+}

@@ -1,0 +1,10 @@
+node_modules
+dist
+.local
+
+**/*.svg
+**/*.sh
+
+public
+stats.html
+.npmrc

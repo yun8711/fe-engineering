@@ -1,0 +1,10 @@
+.container .main .name,.container .main .text{
+    max-width: 100%;
+    text-align: center;
+}
+.container .main .text{
+    font-size: 1.5rem;
+}
+.container .actions{
+    justify-content: center;
+}

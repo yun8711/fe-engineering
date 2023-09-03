@@ -1,0 +1,32 @@
+# 工作流名称
+name: Deploy Pages
+# master分支有push操作时触发
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  deploy:
+    # 运行环境
+    runs-on: ubuntu-latest
+    steps:
+      # 检出仓库
+      - name: Checkout
+        uses: actions/checkout@v3
+      # 安装PNPM
+      - name: Setup Pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7
+          run_install: false
+      # 安装依赖并构建
+      - name: Install and Build
+        run: | 
+          pnpm install
+          pnpm docs:build
+      # 部署到gh-pages
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.ACCESS_TOKEN }}
+          publish_dir: docs/.vitepress/dist
