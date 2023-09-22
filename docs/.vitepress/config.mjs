@@ -85,6 +85,7 @@ export default defineConfig({
               ],
             },
             { text: "EditorConfig", link: "/docs/editorconfig" },
+            { text: "jsconfig.json", link: "/docs/jsconfig" },
             {
               text: "ESLint",
               link: "/docs/eslint/",

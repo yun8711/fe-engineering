@@ -10,6 +10,7 @@ next: false
 - [Browserslist](./browserslist)
 - [版本和 changelog 管理](./changelog/)
 - [EditorConfig](./editorconfig)
+- [jsconfig.json](./jsconfig)
 - [ESLint](./eslint/index)
 - [Git](./git/gitattributes)
 - [GitHub](./github/github-actions)
