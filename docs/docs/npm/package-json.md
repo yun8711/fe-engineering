@@ -999,3 +999,29 @@ gitHooks 用来定义一个钩子，在git commit之前执行 ESlint 检查。�
 ```
 
 这里就是配合上面的 lint-staged 来进行代码的检查操作
+
+<br/>
+
+### web-types
+
+[Web-types – Filling a Vue Libraries Documentation Gap](https://blog.jetbrains.com/webstorm/2021/01/web-types/)
+
+在使用 webstrom 编写页面时，为了提供更好的代码提示，比如使用 element-plus 时，当键入 el 时，就会出现 element-plus 相关组件的提示，并且当键入属性、slot、方法的首字母时，也会弹出相应的提示。这样避免了在 ide 和 ui文档之间来回切换，开发体验很棒。
+
+于是就有了web-types.json这个东西，只要在package.json配置了`"web-types": "web-types.json"`，WebStorm就会去相应目录寻找这个文件并进行解析，在编辑器中提供相应的提示。
+
+<br/>
+
+### vetur
+
+[相关阅读](https://juejin.cn/post/7239282783293243453?searchId=2023100801225004D0F6EA6DD18CC74246)
+
+同理，vetur 也是用来实现相同的效果，不过它是针对 vetur 插件的，需要配置 attribute.json、tags.json
+
+```json
+"vetur": {
+    "tags": "tags.json",
+    "attributes": "attributes.json"
+  },
+```
+
