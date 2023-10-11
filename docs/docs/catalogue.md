@@ -19,3 +19,4 @@ next: false
 - [ls-lint](./ls-lint)
 - [NPM](./npm/package-json)
 - [Stylelint](./stylelint/index)
+- [TypeScript](./typescript/)
