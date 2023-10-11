@@ -21,9 +21,9 @@ export default defineConfig({
   themeConfig: {
     // 首页顶部导航栏
     nav: [
-      { text: "首页", link: "/" },
       { text: "关于本站", link: "/guide/about", activeMatch: "/guide/" },
-      { text: "文档目录", link: "/docs/catalogue", activeMatch: "/docs/" },
+      { text: "配置文档", link: "/docs/catalogue", activeMatch: "/docs/" },
+      { text: "npm包", link: "/pkgs/", activeMatch: "/pkgs/" },
       { text: "工具", link: "https://github.com/yun8711/yun-kit.git" },
     ],
     // 每个页面右侧大纲标题
@@ -59,7 +59,6 @@ export default defineConfig({
     sidebar: {
       "/guide/": [
         {
-          // text: "指引",
           items: [
             { text: "关于本站", link: "/guide/about" },
             { text: "Q&A", link: "/guide/some-questions" },
@@ -135,6 +134,21 @@ export default defineConfig({
               collapsed: true,
               items: [{ text: ".stylelintrc", link: "/docs/stylelint/stylelintrc" }],
             },
+            {
+              text: "TypeScript",
+              link: "/docs/typescript/",
+              collapsed: true,
+              items: [{ text: "tsconfig.json", link: "/docs/typescript/tsconfig-json" }],
+            },
+          ],
+        },
+      ],
+      "/pkgs/": [
+        {
+          items: [
+            { text: "文档目录", link: "/pkgs/" },
+            { text: "escape-html", link: "/pkgs/escape-html" },
+            { text: "prismjs", link: "/pkgs/prismjs" },
           ],
         },
       ],
