@@ -71,6 +71,15 @@ export default defineConfig({
         {
           items: [
             { text: "文档目录", link: "/docs/catalogue" },
+            {
+              text: "Prettier",
+              link: "/docs/prettier/",
+              collapsed: true,
+              items: [
+                { text: "概述", link: "/docs/prettier/" },
+                { text: "配置详解", link: "/docs/prettier/prettierrc" },
+              ],
+            },
             { text: "Browserslist", link: "/docs/browserslist" },
             {
               text: "版本和changelog管理",
@@ -115,7 +124,6 @@ export default defineConfig({
               ],
             },
             { text: "Husky", link: "/docs/husky" },
-            { text: "Prettier", link: "/docs/prettier" },
             { text: "Lint-staged", link: "/docs/lint-staged" },
             { text: "ls-lint", link: "/docs/ls-lint" },
             {
