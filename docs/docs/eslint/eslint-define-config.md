@@ -120,7 +120,7 @@ module.exports = defineConfig({
 - [eslint-plugin-eslint-comments](https://mysticatea.github.io/eslint-plugin-eslint-comments/)：ESLint 指令注释的规则
 - [@graphql-eslint](https://the-guild.dev/graphql/eslint/docs)：专用于GraphQL 的 ESLint 解析器、插件、规则集
 - [eslint-plugin-import](https://github.com/import-js/eslint-plugin-import#installation)：
-- [eslint-plugin-jsdoc]((https://github.com/gajus/eslint-plugin-jsdoc#configuration))
+- [eslint-plugin-jsdoc](https://github.com/gajus/eslint-plugin-jsdoc#configuration)
 - [eslint-plugin-jsonc](https://github.com/ota-meshi/eslint-plugin-jsonc#configuration)
 - [eslint-plugin-jsx-a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y)
 - [eslint-plugin-mdx](https://github.com/mdx-js/eslint-mdx/tree/master/packages/eslint-plugin-mdx)
