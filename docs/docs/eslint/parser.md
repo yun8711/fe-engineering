@@ -1,10 +1,8 @@
 ---
 outline: deep
-prev: true
-next: true
 ---
 
-<h1>eslint parser</h1>
+<h1>eslint 解析器</h1>
 
 [官网](https://zh-hans.eslint.org/) | [github](https://github.com/eslint/eslint)
 

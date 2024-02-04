@@ -71,6 +71,7 @@ export default defineConfig({
         {
           items: [
             { text: "文档目录", link: "/docs/catalogue" },
+            { text: "EditorConfig", link: "/docs/editorconfig" },
             {
               text: "Prettier",
               link: "/docs/prettier/",
@@ -78,6 +79,24 @@ export default defineConfig({
               items: [
                 { text: "概述", link: "/docs/prettier/" },
                 { text: "配置详解", link: "/docs/prettier/prettierrc" },
+              ],
+            },
+            {
+              text: "ESLint",
+              link: "/docs/eslint/",
+              collapsed: true,
+              items: [
+                { text: "概述", link: "/docs/eslint/" },
+                { text: "解析器", link: "/docs/eslint/parser" },
+                { text: "Flat Config 配置详解", link: "/docs/eslint/eslint-config-js" },
+                { text: "eslintrc* 配置详解", link: "/docs/eslint/eslintrc" },
+                { text: "忽略文件配置", link: "/docs/eslint/eslintignore" },
+                { text: "插件:eslint-config-prettier", link: "/docs/eslint/eslint-config-prettier" },
+                { text: "插件:eslint-plugin-prettier", link: "/docs/eslint/eslint-plugin-prettier" },
+                { text: "插件:typescript-eslint", link: "/docs/eslint/typescript-eslint" },
+                { text: "插件:@babel/eslint-parser", link: "/docs/eslint/babel-eslint-parser" },
+                { text: "插件:eslint-plugin-vue", link: "/docs/eslint/eslint-plugin-vue" },
+                { text: "插件:eslint-define-config", link: "/docs/eslint/eslint-define-config" },
               ],
             },
             { text: "Browserslist", link: "/docs/browserslist" },
@@ -92,18 +111,7 @@ export default defineConfig({
                 { text: "conventional-changelog", link: "/docs/changelog/conventional-changelog" },
               ],
             },
-            { text: "EditorConfig", link: "/docs/editorconfig" },
             { text: "jsconfig.json", link: "/docs/jsconfig" },
-            {
-              text: "ESLint",
-              link: "/docs/eslint/",
-              collapsed: true,
-              items: [
-                { text: "parser", link: "/docs/eslint/parser" },
-                { text: ".eslintrc", link: "/docs/eslint/eslintrc" },
-                { text: ".eslintignore", link: "/docs/eslint/eslintignore" },
-              ],
-            },
             {
               text: "Git",
               link: "/docs/git/gitattributes",
