@@ -114,12 +114,13 @@ export default defineConfig({
             { text: "jsconfig.json", link: "/docs/jsconfig" },
             {
               text: "Git",
-              link: "/docs/git/gitattributes",
+              link: "/docs/git/gitignore",
               collapsed: true,
               items: [
-                { text: "git workflows", link: "/docs/git/git-workflows" },
-                { text: ".gitattributes", link: "/docs/git/gitattributes" },
                 { text: ".gitignore", link: "/docs/git/gitignore" },
+                { text: ".gitattributes", link: "/docs/git/gitattributes" },
+                { text: "Git LFS", link: "/docs/git/git-lfs" },
+                { text: "Git Workflows", link: "/docs/git/git-workflows" },
               ],
             },
             {

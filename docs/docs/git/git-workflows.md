@@ -1,7 +1,5 @@
 ---
 outline: deep
-prev: false
-next: false
 ---
 
 <h1>Git Workflows</h1>

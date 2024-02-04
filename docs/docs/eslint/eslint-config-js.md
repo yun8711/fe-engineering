@@ -164,7 +164,7 @@ export default [
 
 如果需要使用的共享配置尚未适配扁平风格配置，可以使用`FlatCompat` 工具将 eslintrc 格式转换为平面配置格式。
 
-首先，安装 `@eslint/eslintrc` 包，然后导入 `FlatCompat` 并创建一个新实例来转换现有的 eslintrc 配置，例如，如果 `eslint-config-my-config` 是 eslintrc 格式的，你可以这样写：
+首先，安装 [`@eslint/eslintrc`](https://www.npmjs.com/package/@eslint/eslintrc) 包，然后导入 `FlatCompat` 并创建一个新实例来转换现有的 eslintrc 配置，例如，如果 `eslint-config-my-config` 是 eslintrc 格式的，你可以这样写：
 
 ```js
 import { FlatCompat } from "@eslint/eslintrc";
