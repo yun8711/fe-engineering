@@ -1,7 +1,5 @@
 ---
 outline: deep
-prev: false
-next: false
 ---
 
 <h1>jsconfig.json</h1><p>2023-09-21</p>

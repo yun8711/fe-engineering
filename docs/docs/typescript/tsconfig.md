@@ -3,140 +3,172 @@ outline: deep
 
 ---
 
-<h1>tsconfig.json</h1><p>v5.2（2023.08.26）</p>
+<h1>tsconfig.json配置详解</h1><p>v5.2（2023.08.26）</p>
 
 [官网](https://www.typescriptlang.org/zh/docs/handbook/tsconfig-json.html) | [中文网](https://www.tslang.cn/docs/handbook/tsconfig-json.html) | [配置项列表](https://www.typescriptlang.org/tsconfig) | [官方推荐配置](https://github.com/tsconfig/bases/) | [json scheme](http://json.schemastore.org/tsconfig)
 
-## 概述
-
-如果一个目录下存在一个`tsconfig.json`文件，那么它意味着这个目录是TypeScript项目的根目录。 `tsconfig.json`文件中指定了用来编译这个项目的根文件和编译选项
-
-官方推出了一些基本配置示例 [github.com/tsconfig/bases](https://github.com/tsconfig/bases/) ，可以通过扩展这些已经处理过不同的 JavaScript 运行时环境的 `tsconfig.json` 文件来简化你项目中的 `tsconfig.json`。
-
-如果你的项目是基于 Node.js 12.x 写的，那么你可以使用 npm 模块：[`@tsconfig/node12`](https://www.npmjs.com/package/@tsconfig/node12)：
-
-```json
-{
-  "extends": "@tsconfig/node12/tsconfig.json",
-  "compilerOptions": {
-    "preserveConstEnums": true
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
-}
-```
 
 
+## files
 
-## references - 项目引用
+字符串数组，由文件路径组成，指定要包含在编译中的文件列表
 
-ts 在 3.0 时推出了 references 功能，用来将一个较大的项目切分成若干个较小的项目，强制实施组件之间的逻辑分离，每个项目有不同的 ts 配置。可以大大缩短构建时间、和IDE的交互时间，并以新的和改进的方式组织代码。
+- 如果没有配置 files 或 include，ts 会默认编译当前目录及其子目录中的所有 .ts 或 .tsx 文件
+- 如果 files 中的文件引入不包含在 files 中的文件，ts 也会尝试编译
+- 但是，如果文件明确被 exclude 排除了，或者不满足 include 的条件，那么 ts 不会编译这些文件
 
-<br />
-
-以 [element-plus](https://github.com/element-plus/element-plus) 项目为例，整体采用了 monorepo 方式管理仓库，其中包含若干个子项目：
-
-- internal/eslint-config：用来配置主项目的 eslint，采用 js 编写，一个配置文件
-- internal/*：组件库构建相关子项目，只在开发阶段的 nodejs 环境下运行
-- play：一个在开发阶段运行的示例项目
-- ssr-testing：一个ssr 测试项目
-- 还有其他不同功能的目录和文件模块
-
-如果只能在项目中编写一份 tsconfig.json 文件，那么很难满足整个项目在不同运行环境下的配置需求。所以 element-plus 使用了 references 来对不同的子项目、目录、文件分别提供相应的配置，通过 extends 和 include 指定了作用的目录和文件，最后通过 references 整体引入，这样就很好的划分了项目，减化的配置难度。
-
-- tsconfig.base.json：基础配置
-
-- tsconfig.node.json：继承 tsconfig.base.json，配置了针对 node 环境下的 compilerOptions，
-
-- tsconfig.web.json：继承 tsconfig.base.json，配置了针对 web 项目的 compilerOptions
-
-- tsconfig.play.json：继承 tsconfig.web.json，
-
-- tsconfig.vite-config.json：继承 tsconfig.node.json，只作用于组件文档子项目
-
-- tsconfig.vitest.json：继承tsconfig.web.json，主要针对 vitest 测试
-
-- tsconfig.json：通过 references 将其他几个配置全部引入
-
-  ```json
-  {
-    "references": [
-      { "path": "./tsconfig.web.json" },
-      { "path": "./tsconfig.play.json" },
-      { "path": "./tsconfig.node.json" },
-      { "path": "./tsconfig.vite-config.json" },
-      { "path": "./tsconfig.vitest.json" }
-    ]
-  }
-  ```
-
-  
-
-可以看出，extents 可以减化配置，减少配置文件的体积，include 和 exclude 两个属性指定了不同的配置作用的目录和文件，相当于指定了当前配置文件的作用域
-
-
+<br/>
 
 ## extends
 
-一个字符串，其中包含要继承的另一个配置文件的路径，路径可以使用Node.js风格的解析。
+字符串，表示要继承的另一个可以被 nodejs 解析的配置文件的路径。
 
-首先加载被继承的配置，然后当前配置会覆盖继承来的相同配置。
+**注意**：除 references 配置外，均可以被继承，但是不允许配置文件之间的循环引用。
 
-除 references 外均可以被继承，但是不允许配置文件之间的循环引用。
+<br/>
+
+## include
+
+文件路径或glob 字符串数组，相对于 tsconfig.json 所有目录的相对路径，指定 ts 要编译的文件列表
+
+```json
+{
+  "include": ["src/**/*", "tests/**/*"]
+}
+```
+
+<br/>
+
+## exclude
+
+文件路径或glob 字符串数组，指定解析 include 时需要跳过的文件或目录，只要是被 exclude 指定的，无论 files 和 include 如何指定，都不会包含在编译列表中。
+
+**注意**：它只是在 include 的文件范围内进行排除
+
+<br/>
+
+### 说明
+
+**通配符**
+
+- `*`：匹配 0 或多个字符，不包括目录分隔符
+- `?`：匹配 1 个字符，不包括目录分隔符
+- `**/`：匹配嵌套到任何级别的任何目录
+
+如果 glob 字符串最后不包含文件扩展名或其他通配符，则视为目录，并且包含该目录中所支持扩展名的文件（默认支持 .ts、.tsx、.d.ts，如果 allowJs 为 true，则也支持 .js、.jsx）
+
+<br/>
+
+**files、include和exclude**
+
+优先级从高到低依次是：exclude > files > include
+
+在实际使用中，应该根据项目的需要来决定如何配合使用这三个配置项。
+
+例如，如果你的项目中只有少数几个文件需要被编译，你可以使用 files 来明确指定这些文件。如果你的项目中有大量文件需要被编译，你可以使用 include 来指定一个匹配这些文件的模式。如果你的项目中有一些文件不应该被编译，你可以使用 exclude 来排除这些文件。
 
 
+
+## references
+
+v3.0 引入的一个新特性，用于设置项目引用。基于该配置可以将整个工程拆分成多个部分，比如 UI 部分、Hooks 部分以及主应用等等，为它们使用独立的 ts 配置，这样可以让 TypeScript 项目更好地组织代码，提高构建性能，以及改善编辑器的体验。
+
+*示例*
+
+有如下项目结构
+
+```json
+PROJECT
+├── app
+│   ├── index.ts
+│   ├── tsconfig.json
+├── core
+│   ├── index.ts
+│   ├── tsconfig.json
+├── ui
+│   ├── index.ts
+│   ├── tsconfig.json
+├── utils
+│   ├── index.ts
+│   ├── tsconfig.json
+├── tsconfig.base.json
+```
+
+这四个项目的引用关系是这样的：
+
+```
+app -> core, ui, utils
+core -> utils
+```
+
+这四个项目可以使用完全独立的 tsconfig 配置，如 utils 的 target 为 ES5，而 app 的 target 则可以是 ESNext ，那么检查配置、功能配置等自然也可以不同。
+
+最终在 `app/tsconfig.json` 中定义引用关系：
+
+```json
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "baseUrl": ".",
+    "outDir": "../dist/app"
+  },
+  "include": ["./**/*.ts"],
+  "references": [
+    {
+      "path": "../utils"
+    },
+    {
+      "path": "../core"
+    },
+    {
+      "path": "../ui"
+    }
+  ]
+}
+```
+
+这里的 outDir 被配置为父级目录，因为我们仍然希望这四个项目的构建产物被放置在同一个文件夹下，你也可以根据自己的实际需要定制。
+
+<br/>
 
 ## compilerOptions
 
-### Projects 项目配置
-
-#### composite
-
-属于 compilerOptions 内部的配置，在 Project References 的被引用子项目 `tsconfig.json` 中必须为启用状态，它通过一系列额外的配置项，确保你的子项目能被 Project References 引用，而在子项目中必须启用 declaration ，必须通过 files 或 includes 声明子项目内需要包含的文件等。
-
-
-
-### Language and Environment 语言和环境
+### Language and Environment
 
 #### target - 编译目标
 
-设置编译后要兼容的 JavaScript 版本，可选值包括 es3、es5、es6/es2015、es2016~es2022、esnext（表示当前 TypeScript 支持的最高版本）等。
+默认：`ES3`，类型：`string`，设置编译后要兼容的 js 版本
 
-target 配置会影响 js 特性是否被降级，例如，如果 `target` 是 ES5 或更低版本，箭头函数 `() => this` 会被转换为等价的 `函数` 表达式。
-
-现代浏览器已支持全部 ES6 的功能，没有特殊需要，推荐设置为 `"es2018"`，这个版本对常用语法支持较为全面
-
-如果只使用 Nodejs，应该基于 node 版本设置 target，可以通过 [node.green](https://node.green/) 的支持数据库查询相应的版本，推荐：
-
-| 名称    | 支持的编译目标 |
-| :------ | :------------- |
-| Node 8  | `ES2017`       |
-| Node 10 | `ES2018`       |
-| Node 12 | `ES2019`       |
-
-ES各版本特性：
-
-![f7523d1038d1436d4755591f411dbb68.png](../../images/f7523d1038d1436d4755591f411dbb68.png)
+可选值：es3/5/6/2015~2022/next，esnext 表示当前 ts 支持的最高版本，如无特殊需求，推荐设置为 `"es2018"`，对常用语法支持较为全面的版本。如果只使用 Nodejs，应该基于 node 版本设置 target，可以通过 [node.green](https://node.green/) 的支持数据库查询相应的版本
 
 target 的配置会改变 lib 选项的默认值，而 lib 决定了能否使用某个版本的语法特性，以 replaceAll 为例，如果在项目中直接使用，会给出一个错误提示：***属性“replaceAll”在类型“"linbudu"”上不存在。是否需要更改目标库? 请尝试将 “lib” 编译器选项更改为“es2021”或更高版本***。解决此问题，可以在配置 lib 中包含 `"es2021"` 或者 `"es2021.String"`
 
 
 
-#### lib
+#### lib - 库文件
 
-TypeScript 会自动加载内置的 `lib.d.ts` 等声明文件，而加载哪些文件则和 lib 配置有关。当我们配置了 `"es2021"` 或者 `"es2021.String"`，replaceAll 方法对应的声明文件 `lib.es2021.string.d.ts` 就会被加载，然后我们的 String 类型上才有了 replaceAll 方法。
+类型：`string[]`，指定编译环境需要包含的库文件，
 
-lib 和实际运行环境也有关系。比如，当你的代码仅在 Node 环境下运行时，你的 lib 中不应当包含 `"DOM"` 这个值。对应的，代码中无法使用 window 、document 等全局变量。
+ts 在编译时会自动加载内置的 `lib.d.ts` 等声明文件，这些库文件包含了代码在运行时可能会用到的全局变量、类型、函数等，而 lib 配置就决定了加载哪些库文件。
 
-而 target 对 lib 的影响在于，当你的 target 为更高的版本时，它会自动地将这个版本新语法对应的 lib 声明加载进来，以上面的代码为例， target 为 `"es2021"` 时，不需要专门添加 `"es2021"` 到 lib 中也能使用 ES2021 的 replaceAll 方法 。这是因为既然你的编译产物都到这个版本了，当然可以直接使用这个方法。
+这个配置需要根据项目的实际运行的环境来设定，比如：项目需要运行在浏览器中，那么就需要添加 `DOM` ，它包含了 window、document 等全局变量，但是如果项目仅在 node 环境下运行，那么就不需要 `DOM` 库
+
+可以在源码中查看支持的库文件：`node_modules/typescript/lib`
+
+**注意**：
+
+- lib 配置项只影响 ts 编译的行为，添加相应的库文件，主要是为了在编译时可以识别预设环境中所包含的全局变量、类型、函数等，不会影响你的代码在运行时的行为，如果代码在运行时的环境中实际上并没有这些全局变量和函数，那么你的代码在运行时仍然会报错。
+- target 会影响 lib 的默认值，一般情况下，lib 会自动获取与 target 指定的版本对应的库文件。比如 target 为 `"es2021"` 时，不需要专门添加 `"es2021"` 到 lib 中也能使用 ES2021 的 replaceAll 方法，因为既然你的编译产物都到这个版本了，当然可以直接使用这个方法
 
 
 
 ### Modules 模块
 
-#### baseUrl - 基础路径
+#### baseUrl - 基准路径
 
-设置一个基础路径，用作解析非绝对对模块名的基本目录，例如：
+默认：`.`，类型：`string`，设置一个基准路径，用作解析非绝对模块名的基准目录，例如：
 
 ```
 project
@@ -156,29 +188,13 @@ import { helloWorld } from "hello/world";
 
 
 
-#### module - 模块化规范
+#### module - 模块系统
 
-*参考 [模块](https://www.typescriptlang.org/docs/handbook/modules.html)*
+默认：`CommonJS`，指定编辑器使用哪种模块系统编译代码
 
-指定构建产物使用的模块化规范，可选值有：
+target 为 es3/es5 时，默认值为 commonjs，可选值参考 [模块](https://www.typescriptlang.org/docs/handbook/modules.html) 查看更多信息，
 
-- none
-- [commonjs](https://zh.wikipedia.org/wiki/CommonJS)：nodejs 早期实现的模块化规范，应用于服务端，`require` 导入，`exports` 导出
-- [amd](https://en.wikipedia.org/wiki/Asynchronous_module_definition)：早期在 web 端实现的模块化规范，仅能在浏览器工作
-- [umd](https://github.com/umdjs/umd)：兼容 amd 和 commonjs
-- [system](https://github.com/systemjs/systemjs)：通用的模块加载器，支持 cjs、amd、esm，被 es 模块规范替代
-- es6/es2015：es 规范，`import` 导入， `export` 导出
-- es2020
-- es2022：v4.5，，支持了 Top-Level Await 语法
-- esnext
-- node16：v4.7，代码仅在 node 环境下运行，ts 会开启对 node esm 的支持
-- nodenext
-
-target 为 es3/es5 时，默认值为 commonjs
-
-
-
-相关配置项：moduleResolution、esModuleInterop、allowImportingTsExter、allowArbitraryExtensi、resolveJsonModule
+一般在前端项目指定 `ESNext`，也就是可以使用 import 和 export 语句来导入和导出模块，而 TypeScript 编译器会将这些语句编译为相应的 ECMAScript 语句。
 
 
 
@@ -186,17 +202,17 @@ target 为 es3/es5 时，默认值为 commonjs
 
 参考 [官网-模块解析](https://www.typescriptlang.org/docs/handbook/module-resolution.html) [ts使用手册-模块解析](https://www.patrickzhong.com/TypeScript/zh/reference/module-resolution.html) [知乎- moduleResolution 总结](https://zhuanlan.zhihu.com/p/621795173?utm_id=0)
 
-指定 TypeScript 模块解析策略，可选值有：
+指定 TypeScript 模块解析策略，简单的说就是使用 node 哪个版本来解析模块，可选值有：
 
-- classic：v1.6 之前使用
+- classic：v1.6 之前使用，当前可以完全弃用
 - node/node10：早期 ts 只支持 classic 和 node，所以 node 是 node10 的早期名称，仅支持 commonjs，模仿 nodejs运行时的解析策略在编译阶段定位模块文件
 - node16：支持 `exports` ，同时增加了 esm 限制，例如文件必须带扩展名，所以此时必须设置 package.json 中的 type:module 来明确开启 esm
 - nodenext：最新的 nodejs 模块解析策略，所以是兼容 `node16` 的
-- budler：与 node16、nodenext 一样，支持在 package.json 中配置 imports、exports
+- budler：与 node16、nodenext 相似，但是不需要文件后缀名的声明
 
 
 
-#### paths - 路径
+#### paths - 路径设置
 
 类似于 Webpack 中的 alias，用来声明如何解析 require、imports 中的导入，允许通过 `@/utils` 或类似的方式来简化导入路径
 
@@ -204,24 +220,13 @@ target 为 es3/es5 时，默认值为 commonjs
 
 
 
-
-
 #### resolveJsonModule
 
-启用了这一配置后，你就可以直接导入 Json 文件，并对导入内容获得完整的基于实际 Json 内容的类型推导。
+默认：类型：`boolean`，指定编译器是否允许导入 json 模块。
 
-```json
-{
-    "repo": "TypeScript",
-    "dry": false,
-    "debug": false
-}
-import settings from "./settings.json";
- 
-settings.debug === true;
-// 对应的类型报错
-settings.dry === 2;
-```
+启用了这一配置后，就可以直接导入 Json 文件，并获得基于实际 Json 内容的类型推导。
+
+
 
 
 
@@ -316,11 +321,11 @@ PROJECT
 
 
 
-#### types
+#### types - 类型
 
 默认情况下，TypeScript 会加载 `node_modules/@types/` 下的所有声明文件，包括嵌套的 `../../node_modules/@types` 路径，这么做可以让你更方便地使用第三方库的类型。
 
-但如果希望只加载实际使用的类型定义包，就可以通过 types 配置来指定：
+当指定 types 时，则只有列出的包才会被包含在全局范围内
 
 ```json
 {
@@ -360,9 +365,9 @@ PROJECT
 
 #### allowJs - 允许 js
 
+类型：`boolean`，默认：
+
 允许在项目中使用 js 代码，而不仅仅只能使用.ts、.tsx 文件
-
-
 
 
 
@@ -377,6 +382,8 @@ PROJECT
 
 
 #### sourceMap
+
+类型：`boolean`，默认：
 
 是否生成源码映射文件，如果设置为 true，则在输出.js 文件的同时输出.js.map（或.jsx.map）
 
@@ -393,6 +400,8 @@ PROJECT
 #### allowSyntheticDefaultImports - 允许合成默认导入
 
 是否允许从没有默认导出的模块中默认导入，默认：false
+
+
 
 #### esModuleInterop - es 模块互操作
 
@@ -538,7 +547,9 @@ module.exports.default = allHandlers;
 
 #### forceConsistentCasingInFileNames - 文件系统大小写
 
-是否区分文件系统大小写规则，默认 false，即不区分大小写
+默认：`false`，
+
+是否区分文件系统大小写规则，默认不区分大小写
 
 
 

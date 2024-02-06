@@ -1,6 +1,5 @@
 ---
 outline: deep
-prev: false
 ---
 
 <h1>TypeScript</h1><p>v5.2（2023.08.26）</p>
@@ -45,32 +44,40 @@ prev: false
 
 ## 使用
 
-### 安装
+安装
 
 ```shell
 npm install -g typescript
 ```
 
+全局安装后，就可以调用全局命令 `tsc` 对.ts 文件进行编译，比如
 
-
-### 使用 tsc
-
-系统中安装 typescript（全局）后，就可以调用全局命令 tsc 对.ts 文件进行编译，比如
-
-```
+```shell
 tsc helloworld.ts
 ```
 
-
-
-### 直接运行 ts 文件
-
-使用 [ts-node](https://www.npmjs.com/package/ts-node)，可以不用编译直接运行 .ts 文件
+也可使用 [ts-node](https://www.npmjs.com/package/ts-node) 这种工具，可以不用编译直接运行 .ts 文件
 
 
 
-### 在工程中使用
+## 配置
 
-一般在工程中使用 ts 时，会创建一个 tsconfig.json 配置文件来更好的使用 ts。
+在工程项目中使用 ts 时，需要创建一个 tsconfig.json 配置文件，可以手动复制一个，也可以使用 `tsc --init` 来自动初始化一个配置文件。
 
-可以手动复制一个，也可以使用 tsc --init 来自动初始化一个配置文件
+如果一个目录下存在一个`tsconfig.json`文件，那么它意味着这个目录是TypeScript项目的根目录。 `tsconfig.json`文件中指定了用来编译这个项目的根文件和编译选项等配置。
+
+官方推出了一些基本配置示例 [github.com/tsconfig/bases](https://github.com/tsconfig/bases/) ，可以通过扩展这些已经处理过不同的 JavaScript 运行时环境的 `tsconfig.json` 文件来简化配置过程
+
+如果你的项目是基于 Node.js 12.x 写的，那么你可以使用 npm 模块：[`@tsconfig/node12`](https://www.npmjs.com/package/@tsconfig/node12)：
+
+```json
+{
+  "extends": "@tsconfig/node12/tsconfig.json",
+  "compilerOptions": {
+    "preserveConstEnums": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}
+```
+

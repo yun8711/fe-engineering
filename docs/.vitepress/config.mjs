@@ -170,8 +170,9 @@ export default defineConfig({
               link: "/docs/typescript/",
               collapsed: true,
               items: [
-                { text: "jsconfig.json", link: "/docs/typescript/jsconfig" },
-                { text: "tsconfig.json", link: "/docs/typescript/tsconfig" },
+                { text: "概述", link: "/docs/typescript/" },
+                { text: "jsconfig.json配置", link: "/docs/typescript/jsconfig" },
+                { text: "tsconfig.json配置", link: "/docs/typescript/tsconfig" },
               ],
             },
           ],
