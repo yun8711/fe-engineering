@@ -55,7 +55,7 @@ Git LFS（Git Large File Storage）是 Git 的一个扩展，旨在更**有效�
 
 **mac**
 
-```
+```shell
 # 下载
 brew install git-lfs
 # 安装
@@ -82,7 +82,7 @@ git lfs install
 
 下载并安装 git lfs 后，执行以下命令，为帐户设置 Git LFS：
 
-```
+```shell
 git lfs install
 ```
 
@@ -94,13 +94,13 @@ git lfs install
 
 在要使用 Git LFS 的 Git 存储库中，选择希望 Git LFS 管理的文件类型，执行以下命令：
 
-```
+```shell
 git lfs track "*.zip"
 ```
 
 track 命令实际上是修改了仓库中的.gitattributes文件，它会在`.gitattributes`文件中增加如下信息：
 
-```
+```ini
 *.zip filter=lfs diff=lfs merge=lfs -text
 ```
 
@@ -126,7 +126,7 @@ track 命令实际上是修改了仓库中的.gitattributes文件，它会在`.g
 
 要使用Git LFS跟踪大文件，你需要使用`git lfs track`命令。例如：
 
-```
+```shell
 git lfs track "*.zip"
 ```
 
@@ -153,14 +153,14 @@ Listing excluded patterns
 
 取消继续跟踪某类文件，并将其从cache中清理：
 
-```text
+```shell
 git lfs untrack "*.zip"
 git rm --cached "*.zip"
 ```
 
 如果你想将这些文件添加回常规 Git 跟踪，可以执行以下操作：
 
-```text
+```shell
 git lfs track "*.zip"
 
 git commit -m "重新添加.zip lfs配置"
@@ -172,7 +172,7 @@ git commit -m "重新添加.zip lfs配置"
 
 通过git lfs lock命令，你可以锁定大文件，以防止其他人修改它们。解锁文件允许其他人继续修改文件。
 
-```text
+```shell
 git lfs lock some_large_file.jpg
 git lfs unlock some_large_file.jpg
 ```
@@ -183,7 +183,7 @@ git lfs unlock some_large_file.jpg
 
 使用以下命令可以查看有关LFS的信息：
 
-```text
+```shell
 git lfs ls-files
 git lfs status
 ```

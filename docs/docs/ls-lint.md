@@ -1,7 +1,5 @@
 ---
 outline: deep
-prev: false
-next: false
 ---
 
 <h1>ls-lint</h1><p>v2.0.0（2023-05-23）</p>
@@ -33,13 +31,27 @@ ignore:
   - node_modules
 ```
 
-## 依赖
+---
 
-```
+查看了它的官方仓库，发现它使用了 **Go 和 Starlark** 编写
+
+Go 语言是 ls-lint 的主要编程语言，利用它的高效率实现工具的核心功能，如解析文件、执行 linting 规则等。 
+
+Starlark 是 Google 开发的一种 Python 风格的语言，语法简单明了，易于学习和使用，旨在提供 Python 的大部分功能，同时保持可嵌入性和性能。主要用于配置文件和构建过程，被广泛用于 Bazel 和 Buck 等构建工具中。
+
+Starlark 语言在 ls-lint 中的主要用途是定义 linting 规则。Starlark 的灵活性使 ls-lint 具有高的可定制性。
+
+
+
+## 用法
+
+### 安装
+
+```shell
 pnpm add @ls-lint/ls-lint -D
 ```
 
-## 用法
+<br/>
 
 ### 配置文件
 
@@ -48,7 +60,7 @@ pnpm add @ls-lint/ls-lint -D
 - `ls`：用来定义项目目录的结构及其扩展、子扩展和目录的所有规则
 - `ignore`：文件用来声明要被忽略检查的目录和文件
 
-```
+```yaml
 ls:
     ...
 
@@ -62,7 +74,7 @@ ignore:
 
 所有 `.js`,`.ts`和`.d.ts`项目文件必须以样式命名`kebab-case`，但忽略`.git`和`node_modules` 目录：
 
-```json
+```yaml
 ls:
     .js: kebab-case
     .ts: kebab-case

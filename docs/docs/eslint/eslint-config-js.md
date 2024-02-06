@@ -397,7 +397,7 @@ export default [
 
 在 eslintrc 配置系统中，可以使用 `eslint-env` 配置注释为单个文件定义全局变量
 
-```
+```js
 // tests/my-file.js
 /* eslint-env mocha */
 ```

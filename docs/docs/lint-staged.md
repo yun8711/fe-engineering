@@ -1,7 +1,5 @@
 ---
 outline: deep
-prev: false
-next: false
 ---
 
 <h1>lint-staged</h1><p>v13.2.3</p>

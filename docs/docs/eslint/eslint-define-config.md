@@ -141,7 +141,7 @@ module.exports = defineConfig({
 
 使用时可以直接导入
 
-```
+```js
 import {
   VitestRules,
   VueRules,

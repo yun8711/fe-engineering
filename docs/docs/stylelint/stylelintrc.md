@@ -1,16 +1,59 @@
 ---
 outline: deep
-prev: false
-next: false
 ---
 
-<h1>stylelintrc</h1><p>v15.10.2</p>
+<h1>配置项详解</h1><p>v16.2.1</p>
 
-[官网](https://stylelint.io/) | [中文翻译](https://cloud.tencent.com/developer/doc/1267) | [github](https://github.com/stylelint/stylelint) | [stylelint插件](https://github.com/stylelint/awesome-stylelint#plugins) | [stylelint共享配置](https://github.com/stylelint/awesome-stylelint#configs)
+[官网](https://stylelint.io/) | [中文翻译](https://cloud.tencent.com/developer/doc/1267) | [github](https://github.com/stylelint/stylelint)
 
 
 
 ## 配置项
+
+以下是一些常用的配置项
+
+### extends
+
+字符串或字符串数组，表示使用已存在的配置文件（自定义配置或是第三方的配置）用来扩展现有的配置，当继承多个配置时，后面的配置优先级更高
+
+共享配置可以捆绑插件、自定义语法、选项和规则，还可以扩展其他配置。
+
+extends 的值可以是任意合法的，能被 Node `require.resolve()` 加载的文件，因此，它可以是：
+
+- 位于 node_modules 的依赖，比如`stylelint-config-standard`，它导出一个 json 格式的配置
+- js 或 json 格式配置文件的绝对路径
+- js 或 json 格式配置文件的，相对于当前配置文件的相对路径
+
+在 [Awesome Stylelint](https://stylelint.io/awesome-stylelint) 可以找到更多共享配置
+
+<br/>
+
+### plugins
+
+一个包含插件对象或路径的数组。
+
+插件是自定义规则或自定义规则集，用于支持方法、工具集、非标准 CSS 功能或非常具体的用例
+
+插件可以是：
+
+- npm 模块名称
+- 插件的绝对路径
+- 相对于当前配置文件的相对路径
+
+插件通常包含在extends 中，比如 stylelint-config-standard-scss 配置就包含了 stylelint-scss 插件
+
+声明插件后，需要在 rules 中添加插件规则，例如：
+
+```json
+{
+  "plugins": ["../special-rule.js"],
+  "rules": {
+    "plugin-namespace/special-rule": "everything"
+  }
+}
+```
+
+<br/>
 
 ### rules
 
@@ -48,54 +91,9 @@ rules 的值是一个对象，键名为规则名称，值为规则配置。
 
 <br/>
 
-### extends
-
-使用已存在的配置文件（自定义配置或是第三方的配置）用来扩展现有的配置。可以扩展 plugins、rules、customSyntax等配置项。
-
-字符串，表示继承单个配置，数组表示继承多个配置。当继承多个配置时，后面的配置优先级更高
-
-可扩展的配置：
-
-- 位于 node_modules 的依赖，比如`stylelint-config-standard`，它导出一个 json 格式的配置
-- js 或 json 格式配置文件的绝对路径
-- js 或 json 格式配置文件的，相对于当前配置文件的相对路径
-
-<br/>
-
-### plugins
-
-数组。插件是为支持方法、工具集、非标准 CSS 功能或非常具体的用例而创建的自定义规则或自定义规则集
-
-插件可以是：
-
-- npm 模块名称
-- 插件的绝对路径
-- 相对于当前配置文件的相对路径
-
-插件通常包含在extends 中，比如 stylelint-config-standard-scss 配置就包含了 stylelint-scss 插件
-
-声明插件后，需要在 rules 中添加插件规则，例如：
-
-```json
-{
-  "plugins": ["../special-rule.js"],
-  "rules": {
-    "plugin-namespace/special-rule": "everything"
-  }
-}
-```
-
-<br/>
-
-### customSyntax
-
-指定自定义语法
-
-<br/>
-
 ### overrides
 
-指定要应用配置的子集，就是针对不同文件指定不同的规则
+指定要应用配置的文件子集，就是针对不同文件指定不同的规则
 
 属性值是对象数组，每个对象：
 
@@ -135,9 +133,17 @@ rules 的值是一个对象，键名为规则名称，值为规则配置。
 
 <br/>
 
+### ignoreFiles
+
+指定要忽略的文件，值是 glob 语法的单文件或数组，默认忽略 node_modules 目录。
+
+如果要忽略大量文件，推荐在`.stylelintignore`中设置，并且它的优先级更高。
+
+<br/>
+
 ### defaultSeverity
 
-指定默认的错误级别，优先级低于在 rules 中的配置
+指定默认的错误级别，优先级低于在 rules 中的配置，所以它会应用于所有未在配置中声明的规则
 
 ### <br/>
 
@@ -181,9 +187,7 @@ rules 的值是一个对象，键名为规则名称，值为规则配置。
 }
 ```
 
-
-
-### <br/>
+<br/>
 
 ### configurationComment❓⬇️
 
@@ -209,92 +213,39 @@ styleint 的 `/* stylelint-disable */` 注释，可以在代码中禁用所有�
 
 stylelint 不会进行检查
 
-### <br/>
+<br/>
+
+### allowEmptyInput
+
+默认：false，表示是否允许没有输入文件
+
+默认情况下，当 glob 模式不匹配任何文件时，Stylelint 会输出一条错误消息并停止运行。
+
+<br/>
+
+### cache ?
+
+默认：false，表示是否缓存处理结果，方便 stylelint 只对更改的文件进行检查。
+
+默认情况下，缓存文件会存放在`process.cwd()`下的`./.stylelintcache`
+
+> 好像在配置文件中设置并不生效，需要在命令行中增加该参数
+>
+> 另外，如果配合 lint-staged 使用，缓存的意义也不大
+
+<br/>
+
+### fix
+
+是否自动修复，一般在命令行调用时传入参数
+
+<br/>
 
 ### ignoreDisables❓⬇️
 
 控制 Stylelint 是否忽略被禁用的规则
 
 默认情况下，当在代码中使用注释禁用某个规则时，Stylelint会检查所有被禁用的规则，并输出警告或错误消息。但是，当`ignoreDisables`设置为`true`时，Stylelint会忽略所有被禁用的规则，并不会报告任何警告或错误消息。这可用于在特定情况下暂时禁用某些规则，而不会对整个项目产生不良影响。
-
-### <br/>
-
-### ignoreFiles ⬇️
-
-指定要忽略的文件，值是 glob 语法的单文件或数组，默认忽略 node_modules 目录。
-
-如果要忽略大量文件，推荐在`.stylelintignore`中设置，并且它的优先级更高。
-
-### <br/>
-
-### allowEmptyInput
-
-当 glob 模式不匹配任何文件时，也就是没有没有输入文件时，Stylelint 不会抛出错误。默认情况下，没有任何输入文件时，Stylelint会输出一条错误消息并停止运行。
-
-### <br/>
-
-### cache
-
-是否缓存处理结果，方便 stylelint 只对更改的文件进行检查。
-
-默认情况下，缓存文件会存放在
-
-<br/>
-
-### fix
-
-是否自动修复，也可以在命令行调用时传入参数
-
-
-
-## 常用插件
-
-stylelint-config-html：Stylelint v14 及更高版本默认不支持非 css 文件，需要该插件用来解析 html、xml、vue、Svelte、Astro、php 这些非 css 文件，需要 postcss-html
-
-```js
-/* 支持所有 */
-{
-  "extends": "stylelint-config-html"
-}
-
-/* 单个指定 */
-{
-  "extends": [
-    "stylelint-config-html/html",
-    "stylelint-config-html/xml",
-    "stylelint-config-html/vue",
-    "stylelint-config-html/svelte",
-    "stylelint-config-html/astro",
-    "stylelint-config-html/php"
-  ]
-}
-```
-
-[stylelint-config-recommended](https://github.com/stylelint/stylelint-config-recommended/blob/main/index.js)：包含所有 Stylelint 官方规则，启用大多数规则
-
-[stylelint-config-standard](https://github.com/stylelint/stylelint-config-standard)：**推荐**，stylelint-config-recommended 的增强版
-
-[stylelint-config-recommended-vue](https://github.com/ota-meshi/stylelint-config-recommended-vue/blob/HEAD/lib/index.js)：扩展stylelint-config-recommended，并提供 Vue 的相关规则 ，需要V14+，需要 postcss-html，使用SCSS需要：stylelint-config-recommended-scss
-
-[stylelint-config-standard-vue](https://github.com/ota-meshi/stylelint-config-standard-vue)：扩展stylelint-config-standard，并提供 Vue 的相关规则 ，需要V14+。使用SCSS需要额外安装：stylelint-config-standard-scss
-
-[stylelint-config-recommended-scss](https://github.com/stylelint-scss/stylelint-config-recommended-scss/blob/HEAD/index.js)：Stylelint 的 SCSS 配置，需要 stylelint-scss、postcss-scss 两个包
-
-[stylelint-config-standard-scss](https://github.com/stylelint-scss/stylelint-config-standard-scss/blob/HEAD/index.js)：style-config-recommended-scss增强版
-
-[stylelint-prettier](https://github.com/prettier/stylelint-prettier)：使 prettier 作为 stylelint 的规则运行，代码不符合 Prettier 的标准时，会报一个 stylelint错误，同时也可以通过 stylelint --fix 来进行格式化
-
-[stylelint-config-prettier](https://github.com/prettier/stylelint-config-prettier)：在 Stylelint v15 以前有用，关闭 stylelint 所有不必要或可能与 Prettier 冲突的规则；在 Stylelint v15 以后，Stylelint关闭了所有与样式相关的规则，所以项目中就不需要该依赖了
-
-[stylelint-order](https://github.com/hudochenkov/stylelint-order)：属性排序功能的基础依赖
-
-[stylelint-config-recess-order](https://github.com/stormwarning/stylelint-config-recess-order)：**推荐**，按 Recess 和 Bootstrap 的方式对 css 属性排序
-
-[stylelint-config-rational-order](https://github.com/constverum/stylelint-config-rational-order)：按合理的顺序对 css 属性排序
-
-[stylelint-config-property-sort-order-smacss](https://github.com/cahamilton/stylelint-config-property-sort-order-smacss)：基于[SMACSS方法的属性排序排序的](http://smacss.com/)[Stylelint](https://github.com/stylelint/stylelint)配置
-
-[postcss-html](https://www.npmjs.com/package/postcss-html)：用于解析 html（类 html，如 sfc、svelte、php 等），使用非 css 时，还需要 postcss-scss、postcss-less 等依赖
 
 
 

@@ -1,15 +1,8 @@
 ---
 outline: deep
-prev: false
-next: false
-
-
-
-
-
 ---
 
-<h1>Stylelint</h1><p>v15.10.2</p>
+<h1>Stylelint</h1><p>v16.2.1</p>
 
 [官网](https://stylelint.io/) | [github](https://github.com/stylelint/stylelint)
 
@@ -25,7 +18,29 @@ Stylelint是一个强大的，现代的代码检查工具，与ESLint类似，St
 
 
 
-**注意** ：Stylelint v15 以后，stylelint不再对 css 格式做检查和自动修复，比如括号、缩进、空格等样式类的控制；所以还需要使用 Prettier 对样式进行美化。
+## 版本变化
+
+### [v16](https://stylelint.io/migration-guide/to-16)
+
+- 添加对 ESM 的支持，支持ESM 插件、ESM 自定义语法、ESM 自定义格式化程序
+- 弃用了 CommonJS Node.js API
+- 内部重构为使用 `.mjs` 和 `.cjs` 扩展
+- 删除了已弃用的样式规则
+- 要求 Node.js >= 18.12.0
+
+### [v15](https://stylelint.io/migration-guide/to-15)
+
+- 弃用了 76 条样式相关的规则，专注于编写和维护 Stylelint 独有的 [avoid errors](https://stylelint.io/user-guide/rules#avoid-errors) 和 [enforce (non-stylistic) conventions](https://stylelint.io/user-guide/rules#enforce-conventions)，这些弃用的规则在当前版本仍有效，在 v16 中会完全删除。
+- 添加``declaration-property-value-no-unknown` 规则，标记 css 规范中未知的属性值。
+- 不再支持 Node.js 12
+- 删除 `processors` 的配置属性
+
+### [v14](https://stylelint.io/migration-guide/to-14)
+
+- 删除了 `syntax` 语法的选项和自动推断
+- 不再支持Node.js 10 
+- 删除了 13.7.0 中弃用的规则
+- 删除`configOverrides` 选项
 
 
 
@@ -33,12 +48,20 @@ Stylelint是一个强大的，现代的代码检查工具，与ESLint类似，St
 
 ### 配置文件
 
-- package.json
-- .stylelintrc | .json | .yaml | js
-- stylelint.config.js
-- stylelint.config.cjs（"type":"module"时需使用.cjs）
+Stylelint 需要一个配置对象，并从以下位置查找：
 
-### 行内配置（不推荐）
+- `stylelint.config.js` 或 `.stylelintrc.js` 文件
+- `stylelint.config.mjs` 或 `.stylelintrc.mjs` 文件，使用 ESM 导出
+- `stylelint.config.cjs` 或使用 `.stylelintrc.cjs` `module.exports` ，使用CommonJS 导出
+- `.stylelintrc.json` 、 `.stylelintrc.yml` 或 `.stylelintrc.yaml` 文件
+- `.stylelintrc` JSON或YAML格式的文件，推荐 JSON 格式
+- `package.json`的 stylelint 属性
+
+推荐使用`stylelint.config.js` 
+
+### 行内配置
+
+Stylelint 也提供了行内注释，但是不推荐使用
 
 - `/* stylelint-disable */`，关闭当前文件内所有规则
 - `/* stylelint-disable selector-max-id, declaration-no-important */`，关闭指定规则
@@ -53,10 +76,4 @@ Stylelint是一个强大的，现代的代码检查工具，与ESLint类似，St
 默认忽略node_modules
 
 
-
-## 安装
-
-核心依赖
-
-stylelint
 

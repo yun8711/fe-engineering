@@ -99,6 +99,20 @@ export default defineConfig({
                 { text: "插件:eslint-define-config", link: "/docs/eslint/eslint-define-config" },
               ],
             },
+            {
+              text: "Stylelint",
+              link: "/docs/stylelint/",
+              collapsed: true,
+              items: [
+                { text: "概述", link: "/docs/stylelint/" },
+                { text: "配置详解", link: "/docs/stylelint/stylelintrc" },
+                { text: "集成插件", link: "/docs/stylelint/integrate" },
+              ],
+            },
+            { text: "markdownlint", link: "/docs/markdownlint" },
+            { text: "ls-lint", link: "/docs/ls-lint" },
+            { text: "Husky", link: "/docs/husky" },
+            { text: "Lint-staged", link: "/docs/lint-staged" },
             { text: "Browserslist", link: "/docs/browserslist" },
             {
               text: "版本和changelog管理",
@@ -111,7 +125,26 @@ export default defineConfig({
                 { text: "conventional-changelog", link: "/docs/changelog/conventional-changelog" },
               ],
             },
-            { text: "jsconfig.json", link: "/docs/jsconfig" },
+            {
+              text: "Pnpm",
+              link: "/docs/pnpm/",
+              collapsed: true,
+              items: [
+                { text: "概述", link: "/docs/pnpm/" },
+                { text: ".npmrc配置", link: "/docs/pnpm/npmrc" },
+                { text: "功能", link: "/docs/pnpm/function" },
+              ],
+            },
+            {
+              text: "npm",
+              link: "/docs/npm/package-json",
+              collapsed: true,
+              items: [
+                { text: "package.json", link: "/docs/npm/package-json" },
+                { text: "package-lock.json", link: "/docs/npm/package-lock" },
+                { text: ".npmrc", link: "/docs/npm/npmrc" },
+              ],
+            },
             {
               text: "Git",
               link: "/docs/git/gitignore",
@@ -132,30 +165,14 @@ export default defineConfig({
                 { text: "github pages", link: "/docs/github/github-pages" },
               ],
             },
-            { text: "Husky", link: "/docs/husky" },
-            { text: "Lint-staged", link: "/docs/lint-staged" },
-            { text: "ls-lint", link: "/docs/ls-lint" },
-            {
-              text: "npm",
-              link: "/docs/npm/package-json",
-              collapsed: true,
-              items: [
-                { text: "package.json", link: "/docs/npm/package-json" },
-                { text: "package-lock.json", link: "/docs/npm/package-lock" },
-                { text: ".npmrc", link: "/docs/npm/npmrc" },
-              ],
-            },
-            {
-              text: "Stylelint",
-              link: "/docs/stylelint/",
-              collapsed: true,
-              items: [{ text: ".stylelintrc", link: "/docs/stylelint/stylelintrc" }],
-            },
             {
               text: "TypeScript",
               link: "/docs/typescript/",
               collapsed: true,
-              items: [{ text: "tsconfig.json", link: "/docs/typescript/tsconfig-json" }],
+              items: [
+                { text: "jsconfig.json", link: "/docs/typescript/jsconfig" },
+                { text: "tsconfig.json", link: "/docs/typescript/tsconfig" },
+              ],
             },
           ],
         },

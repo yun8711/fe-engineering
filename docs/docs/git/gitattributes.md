@@ -20,7 +20,7 @@ outline: deep
 
 语法类似于 `.gitignore` 文件，由一系列模式组成，每个模式占据一行，用于描述要应用的属性或规则。例如：
 
-```
+```ini
 *.txt    text
 *.png    binary
 *.md     text eol=lf
