@@ -5,7 +5,7 @@ export default defineConfig({
   // 站点元数据，会被注入到所有页面的 HTML 中
   // 网站标题
   lang: "zh-CN",
-  title: "前端工程",
+  title: "老刘开发笔记",
   // 网站描述
   description: "分享前端工程配置，探索前端工程最佳实践",
   base: "/fe-engineering/",
@@ -22,9 +22,14 @@ export default defineConfig({
     // 首页顶部导航栏
     nav: [
       { text: "关于本站", link: "/guide/about", activeMatch: "/guide/" },
-      { text: "配置文档", link: "/docs/catalogue", activeMatch: "/docs/" },
-      { text: "npm包", link: "/pkgs/", activeMatch: "/pkgs/" },
-      { text: "工具", link: "https://github.com/yun8711/yun-kit.git" },
+      { text: "前端配置", link: "/docs/catalogue", activeMatch: "/docs/" },
+      {
+        text: "全栈开发",
+        activeMatch: "/nest/",
+        items: [{ text: "Nodejs" }, { text: "Nestjs", link: "/nest/basic/" }],
+      },
+      // { text: "npm包", link: "/pkgs/", activeMatch: "/pkgs/" },
+      // { text: "工具", link: "https://github.com/yun8711/yun-kit.git" },
     ],
     // 每个页面右侧大纲标题
     outline: {
@@ -52,6 +57,17 @@ export default defineConfig({
             },
           },
         },
+      },
+    },
+    docFooter: {
+      prev: "上一页",
+      next: "下一页",
+    },
+    lastUpdated: {
+      text: "最后更新于",
+      formatOptions: {
+        dateStyle: "short",
+        timeStyle: "medium",
       },
     },
 
@@ -184,6 +200,62 @@ export default defineConfig({
             { text: "文档目录", link: "/pkgs/" },
             { text: "escape-html", link: "/pkgs/escape-html" },
             { text: "prismjs", link: "/pkgs/prismjs" },
+          ],
+        },
+      ],
+      "/nest/": [
+        {
+          text: "Nestjs",
+          link: "/nest/basic/",
+          items: [
+            {
+              text: "基础",
+              collapsed: true,
+              activeMatch: "/nest/basic/",
+              items: [
+                { text: "概述", link: "/nest/basic/" },
+                { text: "nest-cli", link: "/nest/basic/nest-cli" },
+                { text: "理解 IoC", link: "/nest/basic/ioc" },
+                { text: "理解 AOP", link: "/nest/basic/aop" },
+                { text: "HTTP 数据传输", link: "/nest/basic/http-transfer" },
+                { text: "内置装饰器", link: "/nest/basic/decorator" },
+              ],
+            },
+            {
+              text: "核心",
+              collapsed: true,
+              items: [
+                { text: "module", link: "/nest/core/module" },
+                { text: "provider", link: "/nest/core/provider" },
+                { text: "middleware", link: "/nest/core/middleware" },
+                { text: "pipe", link: "/nest/core/pipe" },
+              ],
+            },
+            {
+              text: "进阶",
+              collapsed: true,
+              items: [
+                { text: "全局配置", link: "/nest/advanced/setting" },
+                { text: "日志系统", link: "/nest/advanced/log" },
+                { text: "参数校验", link: "/nest/advanced/validate" },
+                { text: "异常过滤器", link: "/nest/advanced/exception-filter" },
+                { text: "集成redis", link: "/nest/advanced/redis" },
+                { text: "集成mysql", link: "/nest/advanced/mysql" },
+                { text: "集成swagger", link: "/nest/advanced/swagger" },
+                { text: "集成compodoc", link: "/nest/advanced/compodoc" },
+                { text: "登录状态", link: "/nest/advanced/login" },
+              ],
+            },
+            // { text: "数据库", link: "/nest/index2" },
+          ],
+        },
+        {
+          text: "数据库",
+          link: "/nest/db/",
+          items: [
+            { text: "概述", link: "/nest/db/" },
+            // { text: "配置", link: "/nest/index1" },
+            // { text: "数据库", link: "/nest/index2" },
           ],
         },
       ],
