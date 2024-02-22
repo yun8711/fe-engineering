@@ -192,3 +192,21 @@ git lfs status
 
 
 
+## 问题
+
+```
+Remote "origin" does not support the Git LFS locking API. Consider disabling it with:
+  $ git config lfs.https://github.com/yun8711/fe-engineering.git/info/lfs.locksverify false
+Post "https://github.com/yun8711/fe-engineering.git/info/lfs/locks/verify": EOF
+error: failed to push some refs to 'https://github.com/yun8711/fe-engineering.git'
+```
+
+这个错误是因为你的 Git LFS 锁定 API 没有被远程仓库 "origin" 支持。Git LFS 锁定 API 是一个可选的特性，它允许你在修改大文件时锁定它们，以防止其他人同时修改。  
+
+当你尝试推送到一个不支持这个特性的远程仓库时，就会出现这个错误。在这种情况下，你可以考虑禁用 Git LFS 锁定 API。按照提示，通过运行以下命令来禁用它
+
+```
+git config lfs.https://github.com/yun8711/fe-engineering.git/info/lfs.locksverify false
+```
+
+然后再次提交即可
