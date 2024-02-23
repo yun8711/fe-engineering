@@ -36,7 +36,7 @@ Nest 提供了一个开箱即用的应用程序架构，允许开发人员和团
 
 Nest 的架构很优雅，因为它用了不少设计模式，比如：Nest 并不和 Express 耦合，你可以轻松切换到 Fastify，因为它用了适配器的设计模式。
 
-![nest_index_02](../../images/nest/index_2.png)
+![nest_index_02](../assets/index_2.png)
 
 Nest 本身只依赖 HttpServer 接口，并不和具体的库耦合。想使用其他的 http 处理的库，只要实现一个适配器就可以了。
 
@@ -64,7 +64,7 @@ nest 在全球范围内越来越火，生态越来越好，基本是 node web �
 
 同时，nest 会用到很多中间件，比如 mysql、redis、rabbitmq、nacos、elasticsearch 等等
 
-![nest_index_01](../../images/nest/index_1.png)
+![nest_index_01](../assets/index_1.png)
 
 所以，以 nest 为切入，学习整个后端生态，是非常 不错的选择，就算换了其他语言，这些中间件依然会用到，只是语法上的不同，基础的概念和原理不会变。
 

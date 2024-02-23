@@ -3,8 +3,8 @@
 layout: home
 
 hero:
-  name: "老刘笔记"
-  text: "分享前端工程配置，探索工程化最佳实践"
+  name: "老刘开发笔记"
+  text: "记录、分享"
 #  text: "探索前端工程最佳实践"
   #  解密前端配置，释放创造力
   #  揭开配置文件的迷雾，畅享前端之旅
@@ -13,13 +13,13 @@ hero:
   #  前端配置助手，让开发无忧
   #  tagline: My great project tagline
   #  tagline: 前端开发乐无边
-  actions:
-    - theme: brand
-      text: 关于本站
-      link: /guide/about
-    - theme: alt
-      text: 文档目录
-      link: /docs/catalogue
+#  actions:
+#    - theme: brand
+#      text: 关于本站
+#      link: /guide/about
+#    - theme: alt
+#      text: 文档目录
+#      link: /docs/catalogue
 #features:
 #  - title: 茫然
 #    details: 越来越多、越来越复杂的前端工程配置，让人眼花缭乱，不知所措。

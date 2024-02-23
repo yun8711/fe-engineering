@@ -160,7 +160,7 @@ export class UserController {
 	}
 ```
 
-![nest_swagger_02](../../images/nest/swagger_2.png)
+![nest_swagger_02](../assets/swagger_2.png)
 
 <br/>
 
@@ -253,7 +253,7 @@ async create(@Body() createCatDto: CreateCatDto) {
 
 在 swagger 文档中就可以看到对应的标注
 
-![nest_swagger_01](../../images/nest/swagger_1.png)
+![nest_swagger_01](../assets/swagger_1.png)
 
 <br/>
 
@@ -272,7 +272,7 @@ async create(@Body() createCatDto: CreateCatDto) {
     }
 ```
 
-![nest_swagger_03](../../images/nest/swagger_3.png)
+![nest_swagger_03](../assets/swagger_3.png)
 
 <br/>
 
@@ -309,10 +309,10 @@ const config = new DocumentBuilder()
 
 然后在接口上使用相应的注解，在 swagger 文档上就会看到如下内容，如果不指定某个接口，它会应用在整个文档上
 
-![nest_swagger_05](../../images/nest/swagger_5.png)
+![nest_swagger_05](../assets/swagger_5.png)
 
 表示该接口需要权限信息才能正常访问，点击锁标志，会弹出一个对话框，如下：
 
-![nest_swagger_06](../../images/nest/swagger_6.png)
+![nest_swagger_06](../assets/swagger_6.png)
 
 输入认证信息后，该接口就可以正常访问。

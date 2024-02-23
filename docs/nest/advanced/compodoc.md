@@ -57,4 +57,4 @@ pnpm dlx @compodoc/compodoc -p tsconfig.json -s -o
 
 这将会在项目根目录下生成一个名为documentation的目录，其中包含你的项目文档的静态网站。你可以通过在浏览器中打开documentation/index.html来查看你的项目文档。
 
-![nest_compodoc](../../images/nest/compodoc.png)
+![nest_compodoc](../assets/compodoc.png)

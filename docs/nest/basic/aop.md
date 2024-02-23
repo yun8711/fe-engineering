@@ -19,11 +19,11 @@ outline: deep
 
 后端框架基本都是 MVC（Model View Controller） 的架构。请求会先发送给 Controller，由它调度 Model 层的 Service 来完成业务逻辑，然后返回对应的 View。
 
-![nest_aop_01](../../images/nest/aop_1.webp)
+![nest_aop_01](../assets/aop_1.webp)
 
 在上面这个流程中，想加入一些通用逻辑，比如：日志记录、权限控制、异常处理等，如果是在 Controller 层代码加入逻辑，一是不优雅，二是侵入了业务逻辑，所以可以在调用 Controller 之前和之后加入一个执行通用逻辑的阶段，例如：
 
-![nest_aop_02](../../images/nest/aop_2.webp)
+![nest_aop_02](../assets/aop_2.webp)
 
 所以，**AOP 的好处是可以把一些通用逻辑分离到切面中，保持业务逻辑的纯粹性，这样切面逻辑可以复用，还可以动态的增删**
 
@@ -145,7 +145,7 @@ Pipe 要实现 PipeTransform 接口，实现 transform 方法，里面可以对�
 
 Middleware、Guard、Pipe、Interceptor、ExceptionFilter 都可以透明的添加某种处理逻辑到某个路由或者全部路由，而不对业务代码进行侵入，这就是 AOP 的好处。
 
-![nest_aop_03](../../images/nest/aop_3.webp)
+![nest_aop_03](../assets/aop_3.webp)
 
 1、进入路由的时候，会先调用 Guard，判断是否有权限等，如果没有权限，就抛异常
 

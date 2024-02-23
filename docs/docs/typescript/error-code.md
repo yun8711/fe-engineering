@@ -12,7 +12,7 @@ https://blog.csdn.net/u010785091/article/details/103123696/
 
 #### TS1259
 
-![ts-error-1259](../../images/ts-error-1259.png)
+![ts-error-1259](../assets/ts-error-1259.png)
 
 
 

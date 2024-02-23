@@ -93,7 +93,7 @@ async function query() {
 
 直接用 form 表单提交数据，和 query 字符串的方式的区别只是放在了 body 里，并且需要指定 `content-type :application/x-www-form-urlencoded`
 
-![nest_http_transfer_1](../../images/nest/http_transfer_1.webp)
+![nest_http_transfer_1](../assets/http_transfer_1.webp)
 
 它的内容也是 query 字符串，所以也要对参数进行编码处理
 
@@ -131,7 +131,7 @@ async function formUrlEncoded() {
 
 指定 content type 为 `multipart/form-data`，数据是用 `--------- + 一串数字`做为 boundary 分隔符，不需要 url encode
 
-![nest_http_transfer_2](../../images/nest/http_transfer_2.webp)
+![nest_http_transfer_2](../assets/http_transfer_2.webp)
 
 Nest 解析 form data 使用 FilesInterceptor 的拦截器，用 @UseInterceptors 装饰器启用，然后通过 @UploadedFiles 来获取非文件的内容，同样是通过 @Body 来取
 

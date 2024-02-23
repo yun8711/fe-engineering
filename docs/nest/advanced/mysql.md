@@ -16,7 +16,7 @@ Nest 本身与数据库无关，可以与任何 SQL 或 NOSQL 数据库集成。
 
 ## TypeORM 流程
 
-![nest_typeorm_01](../../images/nest/typeorm_1.png)
+![nest_typeorm_01](../assets/typeorm_1.png)
 
 DataSource 里存放着数据库连接的配置，比如用户名、密码、驱动包、连接池配置等等
 

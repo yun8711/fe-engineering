@@ -14,7 +14,7 @@ outline: deep
 
 在 NestJS 中，管道（Pipe）是一种有用的工具，用于处理输入数据。它们可以用于验证、转换或解析来自客户端的数据。管道在控制器处理请求之前执行，因此它们是数据预处理的理想选择。
 
-![nest_pipe_01](../../images/nest/pipe_1.png)
+![nest_pipe_01](../assets/pipe_1.png)
 
 管道有两个典型应用场景：
 

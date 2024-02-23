@@ -98,7 +98,7 @@ Controller 依赖了 Service 实现业务逻辑，Service 依赖了 Repository �
 
 假设我们设计一辆汽车：先设计轮子，然后根据轮子大小设计底盘，接着根据底盘设计车身，最后根据车身设计好整个汽车。这里就出现了一个“依赖”关系：汽车依赖车身，车身依赖底盘，底盘依赖轮子。
 
-![ioc_01](../../images/nest/ioc_1.png)
+![ioc_01](../assets/ioc_1.png)
 
 这样的设计，最大的问题就是**可维护性很低**。
 
@@ -106,7 +106,7 @@ Controller 依赖了 Service 实现业务逻辑，Service 依赖了 Repository �
 
 现在换一种思路：我们先设计汽车的大概样子，然后根据汽车的样子来设计车身，根据车身来设计底盘，最后根据底盘来设计轮子。这时候，依赖关系就倒置过来了：轮子依赖底盘， 底盘依赖车身， 车身依赖汽车。
 
-![ioc_02](../../images/nest/ioc_2.png)
+![ioc_02](../assets/ioc_2.png)
 
 这就是**依赖倒置原则**：把原本的上层依赖底层**“倒置”**过来，变成**底层依赖上层**。上层需要什么，底层去实现这样的需求，但是高层并不用管底层是怎么实现的。这样就不会出现前面的“牵一发动全身”的情况。
 
@@ -116,7 +116,7 @@ Controller 依赖了 Service 实现业务逻辑，Service 依赖了 Repository �
 
 控制反转就是依赖倒置原则的一种代码设计思路，具体采用的方法就是依赖注入。
 
-![nest_ioc_03](../../images/nest/ioc_3.png)
+![nest_ioc_03](../assets/ioc_3.png)
 
 
 
@@ -345,8 +345,8 @@ nest 就会从 AppModule 开始解析 class 上通过装饰器声明的依赖信
 
 所以 AppController 只是声明了对 AppService 的依赖，就可以调用它的方法了
 
-![nest_ioc_04](../../images/nest/ioc_4.png)
+![nest_ioc_04](../assets/ioc_4.png)
 
 nest 还加了模块机制，可以把不同业务的 controller、service 等放到不同模块里
 
-![nest_ioc_05](../../images/nest/ioc_5.webp)
+![nest_ioc_05](../assets/ioc_5.webp)
