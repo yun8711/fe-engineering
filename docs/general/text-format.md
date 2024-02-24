@@ -1,10 +1,9 @@
 ---
 outline: deep
-outlineTitle: 本页导航
 
 ---
 
-<h1>文本格式</h1>
+# 文本格式
 
 
 

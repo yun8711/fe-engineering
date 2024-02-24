@@ -2,6 +2,7 @@ import { defineConfig } from "vitepress";
 import configNest from "./config.nest.mjs";
 import configFe from "./config.fe.mjs";
 import configPkgs from "./config.pkgs.mjs";
+import configGeneral from "./config.general.mjs";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -24,7 +25,7 @@ export default defineConfig({
   themeConfig: {
     // 首页顶部导航栏
     nav: [
-      { text: "综合知识", link: "/integration/text-format", activeMatch: "/integration/" },
+      { text: "综合知识", link: "/general/text-format", activeMatch: "/general/" },
       {
         text: "前端",
         activeMatch: "/docs/",
@@ -89,6 +90,7 @@ export default defineConfig({
           ],
         },
       ],
+      "/general/": configGeneral,
       "/docs/": configFe,
       "/pkgs/": configPkgs,
       "/nest/": configNest,
