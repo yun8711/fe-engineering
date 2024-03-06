@@ -106,6 +106,16 @@ export default [
           { text: "tsconfig.json配置", link: "/docs/typescript/tsconfig" },
         ],
       },
+      {
+        text: "UnoCSS",
+        link: "/docs/unocss/",
+        collapsed: true,
+        items: [
+          { text: "概述", link: "/docs/unocss/" },
+          { text: "配置", link: "/docs/unocss/config" },
+          { text: "预设", link: "/docs/unocss/presets" },
+        ],
+      },
     ],
   },
 ];
