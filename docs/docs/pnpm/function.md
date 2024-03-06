@@ -88,7 +88,7 @@ pnpm 的 workspace 协议是一种特殊的依赖关系声明方式，用于在�
 
 ### pnpm-workspace.yaml 配置
 
-一个 workspace 的根目录下必须有 [`pnpm-workspace.yaml`](https://pnpm.io/zh/pnpm-workspace_yaml) 文件，它是用来定义 pnpm 工作空间（workspace）的配置文件，书写格式遵循 [YAML](/integration/text-format) 格式规范，配置项有：
+一个 workspace 的根目录下必须有 [`pnpm-workspace.yaml`](https://pnpm.io/zh/pnpm-workspace_yaml) 文件，它是用来定义 pnpm 工作空间（workspace）的配置文件，书写格式遵循 [YAML](/general/text-format) 格式规范，配置项有：
 
 1、packages：（最主要配置）数组，用来列出所有子包名称，格式可以为：
 

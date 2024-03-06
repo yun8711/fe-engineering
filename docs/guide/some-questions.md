@@ -32,7 +32,7 @@
 
 ### `.xxxignore`文件是如何起作用的？
 
-`ignore` 文件一般表示不需要应用规则的目录或者文件，一般都是使用基于 [glob](/integration/text-format) 的解析库。常用的解析库有：
+`ignore` 文件一般表示不需要应用规则的目录或者文件，一般都是使用基于 [glob](/general/text-format) 的解析库。常用的解析库有：
 
 - ignore：一个轻量级的 Node.js 库，可以解析 `.gitignore` 和 `.npmignore` 文件，并返回一个过滤器函数，可以用来过滤指定目录中的文件。
 - glob：一个功能强大的文件匹配库，可以使用 glob 语法模式匹配文件路径，并返回匹配的文件列表。
@@ -48,7 +48,7 @@
 - Prettier 使用 minimatch 库提供的 `match()` 函数来解析 `.prettierignore` 文件中的 glob
 - Stylelint 使用 micromatch 库来解析 `.stylelintignore` 文件中的 glob 模式，并返回一个正则表达式
 
-这些库具有不同的特点和用途，但它们的核心功能都是基于 [glob](/integration/text-format) 语法实现的
+这些库具有不同的特点和用途，但它们的核心功能都是基于 [glob](/general/text-format) 语法实现的
 
 <br/>
 
