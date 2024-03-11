@@ -3,6 +3,7 @@ import configNest from "./config.nest.mjs";
 import configFe from "./config.fe.mjs";
 import configPkgs from "./config.pkgs.mjs";
 import configGeneral from "./config.general.mjs";
+import configFullStack from "./config.fullstack.mjs";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -32,11 +33,15 @@ export default defineConfig({
         items: [{ text: "工程配置", link: "/docs/catalogue" }],
       },
       {
-        text: "Nodejs",
+        text: "大前端",
         items: [
           { text: "库收集", link: "/pkgs/" },
           { text: "Nestjs", link: "/nest/basic/" },
         ],
+      },
+      {
+        text: "全栈",
+        items: [{ text: "Nginx", link: "/full-stack/nginx/" }],
       },
       // { text: "工具", link: "https://github.com/yun8711/yun-kit.git" },
     ],
@@ -94,6 +99,7 @@ export default defineConfig({
       "/docs/": configFe,
       "/pkgs/": configPkgs,
       "/nest/": configNest,
+      "/full-stack/": configFullStack,
     },
 
     // 顶部导航栏右侧图标
