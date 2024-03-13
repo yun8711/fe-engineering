@@ -31,7 +31,7 @@ HTTP协议本身提供了一种服务端对客户端进行用户身份验证的�
 
 流程如下图：
 
-![img](assets/login_1.webp)
+![img](./assets/login_1.webp)
 
 1、客户端向服务端请求需要登录态的数据
 
@@ -227,7 +227,7 @@ Token 把状态数据都保存在了里面，请求的内容变多了，性能�
 
 ### JWT
 
-> JSW 官网：https://jwt.io/introduction
+> JWT 官网：https://jwt.io/introduction
 
 JWT（`JSON Web Token`）是 `Auth0` 提出的通过 `对JSON进行加密签名` 来实现授权验证的方案，它有三部分组成： 
 
@@ -278,7 +278,7 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4
 
 使用Refresh Token 的流程如下：
 
-![img](assets/login_2.webp)
+![img](./assets/login_2.webp)
 
 1. 客户端向服务端发送认证信息（例如账号密码）
 2. 服务端根据客户端提供的认证信息执行验证逻辑，如果验证成功则生成Token和Refresh Token并返回
@@ -313,7 +313,7 @@ SSO（Single Sign-On，单点登录）是一种在多个应用程序（比如 We
 
 **先访问 `abc.com`**
 
-![img](assets/login_3.webp)
+![img](./assets/login_3.webp)
 
 1、客户端访问 abc.com
 
@@ -339,7 +339,7 @@ SSO（Single Sign-On，单点登录）是一种在多个应用程序（比如 We
 
 **再访问 123.com**
 
-![img](assets/login_4.webp)
+![img](./assets/login_4.webp)
 
 1、客户端访问 123.com
 
@@ -415,7 +415,7 @@ OAuth 就是为了解决上面这些问题而诞生的。
 
 基本流程如下图，参考[微信登录开发指南](https://developers.weixin.qq.com/doc/oplatform/Mobile_App/WeChat_Login/Development_Guide.html)
 
-![img](assets/login_5.png)
+![img](./assets/login_5.png)
 
 1、客户端向微信开发平台（资源所有者）发起请求授权，一般是通过授权服务器间接发起，比如 github 登录时，会跳转到一个页面让我们进行授权
 
@@ -479,7 +479,7 @@ OAuth 就是为了解决上面这些问题而诞生的。
 
 ### 基本流程
 
-![img](assets/login_6.png)
+![img](./assets/login_6.png)
 
 1、客户端访问登录页面，前端向后端请求登录的二维码和key（或者是 uuid），这个key用来索引用户登录状态
 
@@ -515,7 +515,7 @@ OAuth 就是为了解决上面这些问题而诞生的。
 
 ### 基本流程
 
-![img](assets/login_7.png)
+![img](./assets/login_7.png)
 
 1、调用 `SDK` 的初始化方法，传入项目在平台上的 `AppKey` 和 `AppSecret`。
 
