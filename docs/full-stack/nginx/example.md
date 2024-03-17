@@ -6,6 +6,24 @@ outline: deep
 
 
 
+
+
+## vue-router 的 history 模式
+
+vue-router 的 history 模式，使用浏览器的 history API来管理路由状态，而不是依赖于URL中的哈希，但是由于Vue是单页SPA应用，所以每个路由并没有对应的html文件。
+
+所以配置 history 模式的关键就在于，当 url 路径对应的文件或目录不存在时，重定向到 index.html，使得所有的路由请求都指向了 Vue 应用的入口页面，这样就能正确的处理动态路由。
+
+```ini
+location / {
+  try_files $uri $uri/ /index.html;
+}
+```
+
+
+
+
+
 ## 正向代理
 
 一般的访问流程是客户端直接向目标服务器发送请求并获取内容，使用正向代理后，客户端改为向代理服务器发送请求，并指定目标服务器（原始服务器），然后由代理服务器和原始服务器通信，转交请求并获得内容，再返回给客户端。
@@ -344,5 +362,84 @@ fi
 
 
 
-## HTTPS
+## WebSocket
 
+WebSocket是HTML5下一种新的协议。实现了浏览器与服务器全双工通信，能更好的节省服务器资源和带宽并达到实时通讯的目的。
+
+它与HTTP一样通过已建立的TCP连接来传输数据，但是它和HTTP最大不同是：
+
+- WebSocket是一种双向通信协议。在建立连接后，WebSocket 服务器端和客户端都能主动向对方发送或接收数据
+- WebSocket需要像TCP一样，先建立连接，连接成功后才能相互通信
+
+WebSocket应用程序可以在客户端和服务器之间保持长时间运行的连接，从而有助于开发实时应用程序。Nginx从 v1.3 版本开始支持WebSocket，其可以作为一个反向代理和为WebSocket程序做负载均衡。
+
+*示例*
+
+```ini
+user  nginx;
+worker_processes  auto;
+
+error_log  /var/log/nginx/error.log notice;
+pid        /var/run/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    map $http_upgrade $connection_upgrade {
+        default upgrade;
+        '' close;
+    }
+ 
+    upstream websocket { 
+    		# 代理地址
+        server 121.42.165.18:8800;
+    }
+ 
+    server {
+        listen 8021;
+        location / {
+        		# 代理上面的websocket，也可以直接写121.42.165.18:8800
+            proxy_pass http://websocket;	
+            proxy_http_version 1.1;
+            # 表示设置Upgrade不变
+            proxy_set_header Upgrade $http_upgrade;
+            # 表示如果 $http_upgrade为upgrade，则请求为upgrade(websocket)，如果不是，就关闭连接
+            proxy_set_header Connection $connection_upgrade;
+            proxy_set_header Host $host;
+        }
+    }
+}
+```
+
+说明：
+
+1、map指令
+
+根据客户端请求中的值，来构造改变connection_upgrade的值，即根据变量的值创建新的变量connection_upgrade，创建的规则就是`{}`里面的东西。
+
+其中的规则没有做匹配，因此使用默认的，即 :
+
+- 如果`$http_upgrade 不为 '' (空)，` 则$connection_upgrade 为 upgrade 。
+- 如果`$http_upgrade 为 '' (空)，` 则 $connection_upgrade 为 close。
+
+2、默认情况下，如果代理服务器在 60 秒内没有传输任何数据，连接将被关闭。可以使用proxy_read_timeout指令增加此超时 。
+
+
+
+## HTTP2
+
+HTTP 全称是Hypertext Transfer Protocol，是在1989年World Wide Web发展起来之后出现的标准协议，用来在WWW上传输数据。`HTTP/1.1`是1997年在原始的HTTP协议基础上进行的补充和优化。
+
+到了2015年，为了适应快速发送的web应用和现代浏览器的需求，发展出了新的`HTTP/2`协议，主要在`手机浏览器`、`延时处理`、`图像处理`和`视频处理`方面进行了优化。
+
+相对于HTTP1.1来说，HTTP2有如下几个优点：
+
+- 使用**多路复用**技术，在同一个连接中可以并行处理多个请求。
+- 可以压缩HTTP头，减少请求的大小。
+- 数据传输格式是以二进制进行的，所以传输更加有效。
+- 服务器可以向客户端推送数据，从而让应用程序可以处理更加复杂的功能。
+
+尽管HTTP2 并不要求使用加密，但是对于现代浏览器来说如 Google Chrome 和 Mozilla Firefox默认HTTP2 和HTTPS 是一起使用的，所以如果想配置HTTP2的话，还需要同时配置SSL。

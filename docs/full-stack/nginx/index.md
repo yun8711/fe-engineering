@@ -87,3 +87,13 @@ Nginx 本身也是一个静态资源的服务器，当只有静态资源的时�
 5、动静分离
 
 动静分离是让动态网站里的动态网页根据一定规则把不变的资源和经常变的资源区分开来，动静资源做好了拆分以后，我们就可以根据静态资源的特点将其做缓存操作，这就是网站静态化处理的核心思路
+
+
+
+## 安装
+
+[windows操作系统安装Nginx，以及简单配置](https://cloud.tencent.com/developer/article/1795087)
+
+[mac 安装 Nginx 详细教程](https://juejin.cn/post/6986190222241464350)
+
+[Docker 安装 Nginx](https://www.runoob.com/docker/docker-install-nginx.html)
