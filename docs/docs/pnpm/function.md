@@ -211,7 +211,7 @@ pnpm 自带的环境管理功能，可以管理本机的 nodejs 版本，并且�
 
 **注意：**
 
-如果要使用 pnpm 来管理 nodejs 版本，则需要全局安装 pnpm，也就是不通过 `npm -g pnpm` 命令安装，这种安装方式 下 pnpm 还是 npm 的一个包，无法实现管理 nodejs 版本。
+如果要使用 pnpm 来管理 nodejs 版本，则需要**全局安装 pnpm**，也就是不通过 `npm -g pnpm` 命令安装，这种安装方式 下 pnpm 还是 npm 的一个包，无法实现管理 nodejs 版本。
 
 非全局安装情况下，曾经遇到的一个问题是：当使用 pnpm 切换到低版本的 nodejs v10 时，由于此版本的 nodejs 与 pnpm 不兼容，导致 pnpm 命令无法正常执行，也就无法再切换到其他版本的 nodejs。
 

@@ -108,3 +108,47 @@ pnpm 使用符号链接将项目的直接依赖项添加到模块目录的根目
 
 这种策略使得 `pnpm` 在存储空间和安装时间上都比 `npm` 和 `yarn` 更高效。
 
+
+
+## 全局安装
+
+就是使用脚本安装 pnpm，即使没有安装 nodejs
+
+**注意：**
+
+如果要使用 pnpm 来管理 nodejs 版本，则需要**全局安装 pnpm**，也就是在没有 nodejs 的情况下安装 pnpm。
+
+通过 `npm -g pnpm` 命令安装后， pnpm 还是 npm 的一个包，无法实现全局管理 nodejs 版本。
+
+非全局安装情况下，曾经遇到的一个问题是：当使用 pnpm 切换到低版本的 nodejs v10 时，由于此版本的 nodejs 与 pnpm 不兼容，导致 pnpm 命令无法正常执行，也就无法再切换到其他版本的 nodejs。
+
+---
+
+### 脚本安装
+
+按照官网的说明，可以使用下面的方法全局安装 pnpm
+
+```sh
+curl -fsSL https://get.pnpm.io/install.sh | sh -
+# 或
+wget -qO- https://get.pnpm.io/install.sh | sh -
+```
+
+但是这个方法非常考验网络情况，很有可能装不上，我也是碰巧装上了
+
+
+
+### 使用 release assets
+
+另一种方法是后来在更新 pnpm 时发现的
+
+1、首先打开 pnpm 的官方 github 仓库，找到指定的版本的 release 的 assets，选择下载二进制文件
+
+以 macos inter 芯片为例，在 [v8.15.4](https://github.com/pnpm/pnpm/releases/tag/v8.15.4)的 release 页面，点击 pnpm-macos-x64 开始下载
+
+2、下载完成后，找到本地 pnpm 的安装路径，我这是在 `/Users/xxx/Library/pnpm/pnpm`，其中 xxx 是用户名，每个人不一样。
+
+3、把刚下载的二进制文件粘贴进去，原来的 pnpm 文件可以删掉了，然后改名为 `pnpm`，对这个文件执行`chmod +x /path/to/your/pnpm-file`命令，改变文件的权限，使其变成可执行文件
+
+4、最后，执行 `pnpm -v`来验证一下版本
+
