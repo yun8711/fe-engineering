@@ -107,7 +107,7 @@ RBAC（Role-Based Access Control）的核心在于**权限与角色关联，用�
 
 用户与角色之间、角色与权限之间，一般是多对多的关系
 
-![img](../public/general/authorization_1.png)
+![img](assets/authorization_1.png)
 
 
 
@@ -121,11 +121,11 @@ RBAC 级别：
 
 1、**RBAC0**：用户和角色是多对多，角色和权限是多对多。一个用户拥有的权限，是他所有角色的权限的集合。**RBAC0**相当于底层逻辑，后三者都是在**RBAC0**模型上的拔高
 
-![img](../public/general/authorization_2.jpeg)
+![img](assets/authorization_2.jpeg)
 
 2、**RBAC1**：在RBAC0 基础上引入了**角色分级**的概念，类似于树形结构，每个等级对应的权限是不一样的，下级角色继承了上级角色的所有权限，并且支持针对性删减。把权限分给用户时，需要分到对应的角色等级。角色等级低时拥有的权限少，角色等级高的权限是所有角色等级低的权限的集合。
 
-![img](../public/general/authorization_3.jpeg)
+![img](assets/authorization_3.jpeg)
 
 3、**RBAC2**：基于RBAC1，对角色访问进行限制。如：
 
